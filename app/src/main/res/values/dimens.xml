@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dividerHeight">2dp</dimen>
+    <dimen name="sectionNamePaddingLeft">8dp</dimen>
+    <dimen name="itemTitlePaddingTop">4dp</dimen>
+    <dimen name="itemTitlePaddingBottom">4dp</dimen>
+</resources>

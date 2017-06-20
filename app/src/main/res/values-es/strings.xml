@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_items_label">Entradas a recuperar</string>
+    <string name="settings_menu_item">Ajustes</string>
+    <string name="settings_title">Noticias - Ajustes</string>
+    <string name="no_internet_connection">No hay conexión a Internet</string>
+    <string name="no_news_items">No se han encontrado noticias</string>
+    <string name="settings_days_back_title">Días atrás a recuperar</string>
+</resources>
