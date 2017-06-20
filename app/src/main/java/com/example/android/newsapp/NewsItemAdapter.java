@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.android.newsapp;
 
 import android.content.Context;
@@ -29,9 +14,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-
-//import static com.example.android.newsapp.MainActivity.context;
 
 /**
  * An {@link NewsItemAdapter} knows how to create a list item layout for each news item
@@ -82,11 +64,8 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         TextView publishedDate = (TextView) listItemView.findViewById(R.id.published_date);
 
         // Convert the published date from ISO JSON format to java Date type
-//        SimpleDateFormat sdf_ISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
             String iso8601string = currentNewsItem.getWebPublicationDate();
             String s = iso8601string.replace("Z", "+0000");
-//            String s = iso8601string.replace("Z", "+00:00");
-//            s = s.substring(0, 22) + s.substring(23);  // to get rid of the ":"
             Date dateTime = null;
         try {
             dateTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(s);
@@ -101,7 +80,6 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         DateFormat dateFormatter;
 
         //Locale locale = Locale.getDefault();
-//        dateFormatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, locale);
         dateFormatter = DateFormat.getDateTimeInstance();
         dateOut = dateFormatter.format(dateTime);
         publishedDate.setText(dateOut);

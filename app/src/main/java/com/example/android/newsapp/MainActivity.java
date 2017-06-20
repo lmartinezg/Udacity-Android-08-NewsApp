@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity
 
     private static final String LOG_TAG = MainActivity.class.getName();
 
+    /**
+     * URL for news item data from the The Guardian dataset
+     */
+    // http://content.guardianapis.com/search?q=debate&from-date=2017-06-16&order-by=newest&page-size=25&api-key=test
+    private static final String NEWS_REQUEST_URL =
+            "https://content.guardianapis.com/search?q=debate";
+
     // Keys and values for query parameters
     static final String QUERY_FROMDATE_KEY = "from-date";
     static final String QUERY_PAGESIZE_KEY = "page-size";
@@ -43,17 +50,11 @@ public class MainActivity extends AppCompatActivity
     static final String QUERY_APIKEY_VALUE = "test";
 
     /**
-     * URL for news item data from the The Guardian dataset
-     */
-    // http://content.guardianapis.com/search?q=debate&from-date=2017-06-16&order-by=newest&page-size=25&api-key=test
-    private static final String NEWS_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=debate";
-    /**
      * Constant value for the news loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
     private static final int NEWS_LOADER_ID = 1;
-    // LMG static public Context context = null;
+
     /**
      * Adapter for the list of news
      */
@@ -68,9 +69,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Sets context varible to be used for date formatting in other classes
-        // LMG context = this;
 
         // Find a reference to the {@link ListView} in the layout
         ListView newsListView = (ListView) findViewById(R.id.list);
@@ -131,14 +129,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // Lesson 5 - Preferences
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    // Lesson 5 - Preferences
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -152,7 +148,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<List<NewsItem>> onCreateLoader(int i, Bundle bundle) {
-
 
         // http://content.guardianapis.com/search?q=debate&from-date=2017-06-16&order-by=newest&page-size=25&api-key=test
 
