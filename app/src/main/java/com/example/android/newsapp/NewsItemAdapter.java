@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import static android.R.attr.tag;
-
 /**
  * An {@link NewsItemAdapter} knows how to create a list item layout for each news item
  * in the data source (a list of {@link NewsItem} objects).
@@ -28,13 +26,6 @@ import static android.R.attr.tag;
 public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
 
     private static final String LOG_TAG = NewsItemAdapter.class.getName();
-
-
-    /**
-     * The part of the location string from the USGS service that we use to determine
-     * whether or not there is a location offset present ("5km N of Cairo, Egypt").
-     */
-    private static final String LOCATION_SEPARATOR = " of ";
 
     /**
      * Constructs a new {@link NewsItemAdapter}.
@@ -97,7 +88,7 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
 
         // Section
 
-        // Find the TextView with view ID published_date
+        // Find the TextView with view ID section_name
         TextView sectionName = (TextView) listItemView.findViewById(R.id.section_name);
         sectionName.setText(currentNewsItem.getSectionName());
 
@@ -113,22 +104,4 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
         return listItemView;
     }
 
-
-    /**
-     * Converts the date/time format from JSON response to default locale format
-     */
-    private String formatDateTime(String dateTimeISO) {
-
-        SimpleDateFormat sdf_ISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-        Date date = null;
-        try {
-            date = sdf_ISO.parse(dateTimeISO);
-        } catch (ParseException e) {
-            // handle exception here !
-        }
-        String resultDateTime = DateFormat.getDateTimeInstance().format(date);
-
-        return resultDateTime;
-    }
 }

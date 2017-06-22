@@ -6,4 +6,5 @@
     <string name="no_internet_connection">No hay conexión a Internet</string>
     <string name="no_news_items">No se han encontrado noticias</string>
     <string name="settings_days_back_title">Días atrás a recuperar</string>
+    <string name="noApp">No hay ninguna aplicación instalada para mostrar páginas web</string>
 </resources>
