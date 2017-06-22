@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<NewsItem>> {
 
     private static final String LOG_TAG = MainActivity.class.getName();
+
+    // Fixed values for the number of items to retrieve from The Guardian API
+    private static final int ITEMS_DEFAULT = 10;
+    private static final int ITEMS_MIN = 1;
+    private static final int ITEMS_MAX = 50;
 
     /**
      * URL for news item data from the The Guardian dataset
@@ -95,10 +101,21 @@ public class MainActivity extends AppCompatActivity
                 Uri newsItemUri = Uri.parse(currentNewsItem.getWebUrl());
 
                 // Create a new intent to view the news item URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsItemUri);
+                Intent webSiteIntent = new Intent(Intent.ACTION_VIEW, newsItemUri);
 
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+                // Suggestion #1:
+                // You should check if there is an app installed on the phone,
+                // able to handle you event, before you launch it
+
+                // Check if there is an available application to show the web page
+                if (webSiteIntent.resolveActivity(getPackageManager()) != null) {
+                    // Send the intent to launch a new activity
+                    startActivity(webSiteIntent);
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.noApp,
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -234,18 +251,22 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.settings_items_key),
                 getString(R.string.settings_items_default));
 
+        // Suggestion:
+        // If you really wanna use hard limits like these one's please
+        // refactor them in some constants at the top of the class and
+        // give them a meaningful name.
         int itemsInt;
         // Ensure that the value is not out of limits
         try {
             itemsInt = Integer.parseInt(itemsString);
         }catch(NumberFormatException e){
-            itemsInt = 10;
+            itemsInt = ITEMS_DEFAULT;
         }
-        if (itemsInt < 1) {
-            itemsInt = 1;
+        if (itemsInt < ITEMS_MIN) {
+            itemsInt = ITEMS_MIN;
         }
-        if (itemsInt > 50) {
-            itemsInt = 50;
+        if (itemsInt > ITEMS_MAX) {
+            itemsInt = ITEMS_MAX;
         }
 
         // Convert to String

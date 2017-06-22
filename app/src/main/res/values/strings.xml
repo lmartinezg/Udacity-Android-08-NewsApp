@@ -19,5 +19,6 @@
     <!-- Text to display in the list when there are no news items [CHAR LIMIT=NONE] -->
     <string name="no_news_items">No news found.</string>
     <string name="no_internet_connection">There is no internet connection.</string>
+    <string name="noApp">There is no app to show the web page</string>
 
 </resources>

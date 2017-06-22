@@ -1,6 +1,7 @@
 package com.example.android.newsapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static android.R.attr.tag;
+
 /**
  * An {@link NewsItemAdapter} knows how to create a list item layout for each news item
  * in the data source (a list of {@link NewsItem} objects).
@@ -23,6 +26,9 @@ import java.util.List;
  * to be displayed to the user.
  */
 public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
+
+    private static final String LOG_TAG = NewsItemAdapter.class.getName();
+
 
     /**
      * The part of the location string from the USGS service that we use to determine
@@ -69,20 +75,24 @@ public class NewsItemAdapter extends ArrayAdapter<NewsItem> {
             Date dateTime = null;
         try {
             dateTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(s);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        // Convert the date to user format
+
+            // Convert the date to user format
             Calendar calendar = GregorianCalendar.getInstance();
             calendar.setTime(dateTime);
 
-        String dateOut;
-        DateFormat dateFormatter;
+            String dateOut;
+            DateFormat dateFormatter;
 
-        //Locale locale = Locale.getDefault();
-        dateFormatter = DateFormat.getDateTimeInstance();
-        dateOut = dateFormatter.format(dateTime);
-        publishedDate.setText(dateOut);
+            //Locale locale = Locale.getDefault();
+            dateFormatter = DateFormat.getDateTimeInstance();
+            dateOut = dateFormatter.format(dateTime);
+            publishedDate.setText(dateOut);
+
+        } catch (ParseException e) {
+            // Suggestion:
+            // Always better to stick this in a log statement instead of e.printStackTrace();
+            Log.e(LOG_TAG, "Error parsing the date time of the article.");
+        }
 
 
         // Section

@@ -2,11 +2,13 @@ package com.example.android.newsapp;
 
 public class NewsItem {
 
-    private String mId;
-    private String mSectionName;
-    private String mWebPublicationDate;
-    private String mWebTitle;
-    private String mWebUrl;
+    // Suggestion:
+    // These class fields should be final to final immutability.
+    final private String mId;
+    final private String mSectionName;
+    final private String mWebPublicationDate;
+    final private String mWebTitle;
+    final private String mWebUrl;
 
     public NewsItem(String id, String sectionName, String
             webPublicationDate, String webTitle, String webUrl){
